@@ -15,7 +15,6 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <gravity>1</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <visual name='visual'>
@@ -212,7 +211,6 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <gravity>1</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <visual name='visual'>
@@ -309,7 +307,6 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <gravity>1</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <visual name='visual'>
@@ -412,6 +409,19 @@
               <size>0.1 0.1 0.1</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -436,8 +446,27 @@
           <update_rate>30</update_rate>
           <visualize>1</visualize>
         </sensor>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
       </link>
     </model>
+    <joint name='link_1_JOINT_0_0' type='fixed'>
+      <parent>link_1</parent>
+      <child>link_2</child>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
     <joint name='link_1_JOINT_0' type='revolute'>
       <parent>link_1</parent>
       <child>link_0</child>
@@ -455,6 +484,7 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
           <damping>0</damping>
+          <friction>0</friction>
         </dynamics>
       </axis>
       <physics>
@@ -487,8 +517,26 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
           <damping>0</damping>
+          <friction>0</friction>
         </dynamics>
       </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='link_2_JOINT_1' type='fixed'>
+      <parent>link_2</parent>
+      <child>camera::link</child>
+      <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
         <ode>
           <limit>
